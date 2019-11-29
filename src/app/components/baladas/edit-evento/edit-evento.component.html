@@ -1,0 +1,33 @@
+<FlexboxLayout class="page">
+  <StackLayout class="form">
+    <Image class="logo" src="~/app/images/logo-baladin.png"></Image>
+
+    <GridLayout rows="auto, auto, auto">
+      <StackLayout row="0">
+        <Label text="Editar Evento" style="padding:10; horizontal-align: center; color: white; font-size: 20"></Label>
+
+        <TextField class="input" [(ngModel)]="evento.name" hint="{{ evento.name }}" returnKeyType="next">
+        </TextField>
+        <StackLayout class="hr-light"></StackLayout>
+
+        <TextField class="input" [(ngModel)]="evento.descricao" hint="{{ evento.descricao }}" rows="4"
+          returnKeyType="next"></TextField>
+        <StackLayout class="hr-light"></StackLayout>
+
+        <TextField class="input" [(ngModel)]="evento.data" hint="{{ evento.data }}" rows="4" returnKeyType="next">
+        </TextField>
+        <StackLayout class="hr-light"></StackLayout>
+        <DropDown class="dropdown" itemsTextAlignment="center" [items]="estilos" hint="Baladas" (opened)="onopen()"
+          (closed)="onclose()"></DropDown>
+      </StackLayout>
+      <StackLayout row="2">
+        <DropDown class="dropdown" itemsTextAlignment="center" [items]="estilos" hint="Estilo" (opened)="onopen()"
+          (closed)="onclose()"></DropDown>
+      </StackLayout>
+    </GridLayout>
+
+    <Button text="Salvar alterações" class="btn btn-primary m-t-20" (tap)="save()"></Button>
+
+    <Label text="Cancelar" class="login-label" (tap)="cancel()"></Label>
+  </StackLayout>
+</FlexboxLayout>

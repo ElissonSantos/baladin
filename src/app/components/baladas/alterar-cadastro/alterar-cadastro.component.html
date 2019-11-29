@@ -1,0 +1,35 @@
+<FlexboxLayout class="page">
+  <StackLayout class="form">
+    <Image class="logo" src="~/app/images/logo-baladin.png"></Image>
+
+    <PreviousNextView>
+      <GridLayout rows="auto, auto, auto">
+
+        <StackLayout row="0" class="input-field">
+          <TextField #name class="input" [(ngModel)]="user.nome" hint="{{ user.nome }}" returnKeyType="next">
+          </TextField>
+          <StackLayout class="hr-light"></StackLayout>
+
+          <TextField class="input" [(ngModel)]="user.email" hint="{{ user.email }}" keyboardType="email"
+            autocorrect="false" autocapitalizationType="none" returnKeyType="next"></TextField>
+          <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+
+        <StackLayout row="1" class="hr"></StackLayout>
+
+        <StackLayout row="2" class="input-field">
+          <TextField #password class="input" [(ngModel)]="hintold" hint="{{ hintold }}"></TextField>
+          <StackLayout class="hr-light"></StackLayout>
+
+          <TextField class="input" [(ngModel)]="hintnew" hint="{{ hintnew }}"></TextField>
+          <StackLayout class="hr-light"></StackLayout>
+        </StackLayout>
+
+      </GridLayout>
+    </PreviousNextView>
+
+    <Button text="Salvar alterações" class="btn btn-primary m-t-20" (tap)="save()"></Button>
+
+    <Label text="Cancelar" class="login-label" (tap)="cancel()"></Label>
+  </StackLayout>
+</FlexboxLayout>
