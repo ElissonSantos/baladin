@@ -29,7 +29,7 @@ export class LoginComponent {
         this.page.actionBarHidden = true;
         this.user = new User();
         this.logotipo = "~/app/images/logo-baladin.png";
-        this.executa();
+        // this.executa();
     }
 
     executa() {
