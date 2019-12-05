@@ -10,7 +10,7 @@ export interface Evento {
 export interface EventoReturn {
     id: number;
     name: string;
-    data: string;
+    data: Date;
     nomeBalada: string;
     enderecoBalada: string;
     estilo: string;

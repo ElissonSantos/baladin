@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import * as moment from "moment";
 
 import { Balada } from "../models/balada.model";
 import { Evento, EventoReturn } from "../models/evento.model";
@@ -37,7 +38,7 @@ export class BaladasService {
         {
             id: 1,
             name: "Evento1",
-            data: "25 de novembro",
+            data: moment("12/05/2019").toDate(),
             nomeBalada: "Balada1",
             enderecoBalada: "Rua Balada1, Curitiba",
             estilo: "Sertanejo",
@@ -48,12 +49,12 @@ export class BaladasService {
 📍Valores com nome na lista/mural:
     Feminino R$10 até 00h. Apos R$20 ate 01h.
     Masculino R$20 até 00h. Apos R$40 até 01h.`,
-            img: "~/app/images/party.jpg"
+            img: "~/app/images/logo-xs.jpg"
         },
         {
             id: 2,
             name: "Evento2",
-            data: "25 de novembro",
+            data: moment("12/05/2019").toDate(),
             nomeBalada: "Balada2",
             enderecoBalada: "Rua Balada2, Curitiba",
             estilo: "Pop",
@@ -63,7 +64,7 @@ export class BaladasService {
         {
             id: 3,
             name: "Evento3",
-            data: "25 de novembro",
+            data: moment("12/06/2019").toDate(),
             nomeBalada: "Balada3",
             enderecoBalada: "Rua Balada3, Curitiba",
             estilo: "Pop",
@@ -73,7 +74,7 @@ export class BaladasService {
         {
             id: 4,
             name: "Evento4",
-            data: "25 de novembro",
+            data: moment("12/06/2019").toDate(),
             nomeBalada: "Balada4",
             enderecoBalada: "Rua Balada4, Curitiba",
             estilo: "Funk",
@@ -83,7 +84,7 @@ export class BaladasService {
         {
             id: 5,
             name: "Evento5",
-            data: "26 de novembro",
+            data: moment("12/07/2019").toDate(),
             nomeBalada: "Balada5",
             enderecoBalada: "Rua Balada5, Curitiba",
             estilo: "Pagode",
@@ -93,7 +94,7 @@ export class BaladasService {
         {
             id: 6,
             name: "Evento6",
-            data: "26 de novembro",
+            data: moment("12/07/2019").toDate(),
             nomeBalada: "Balada6",
             enderecoBalada: "Rua Balada6, Curitiba",
             estilo: "Eletronico",
@@ -103,7 +104,7 @@ export class BaladasService {
         {
             id: 7,
             name: "Evento7",
-            data: "26 de novembro",
+            data: moment("12/08/2019").toDate(),
             nomeBalada: "Balada7",
             enderecoBalada: "Rua Balada7, Curitiba",
             estilo: "Sertanejo",
@@ -113,7 +114,7 @@ export class BaladasService {
         {
             id: 8,
             name: "Evento8",
-            data: "27 de novembro",
+            data: moment("12/08/2019").toDate(),
             nomeBalada: "Balada8",
             enderecoBalada: "Rua Balada8, Curitiba",
             estilo: "Funk",
@@ -123,7 +124,7 @@ export class BaladasService {
         {
             id: 9,
             name: "Evento9",
-            data: "27 de novembro",
+            data: moment("12/09/2019").toDate(),
             nomeBalada: "Balada9",
             enderecoBalada: "Rua Balada9, Curitiba",
             estilo: "Funk",
@@ -133,7 +134,7 @@ export class BaladasService {
         {
             id: 10,
             name: "Evento10",
-            data: "27 de novembro",
+            data: moment("12/09/2019").toDate(),
             nomeBalada: "Balada10",
             enderecoBalada: "Rua Balada10, Curitiba",
             estilo: "Pop",

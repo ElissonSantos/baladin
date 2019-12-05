@@ -14,18 +14,23 @@
           </StackLayout>
           <StackLayout row="1">
             <Label class="opcoes" text="Escolha o tipo de evento:"></Label>
+
             <StackLayout style=" horizontal-align: center;">
               <CheckBox #sertanejo text="Sertanejo" checked="false" fillColor="white"
-                style="color: white; font-size: 20;"></CheckBox>
-              <CheckBox #pagode text="Pagode" checked="false" fillColor="white" style="color: white; font-size: 20;">
+                style="color: white; font-size: 20;" (checkedChange)="changedCheckBox()"></CheckBox>
+              <CheckBox #pagode text="Pagode" checked="false" fillColor="white" style="color: white; font-size: 20;"
+                (checkedChange)="changedCheckBox()">
               </CheckBox>
               <CheckBox #eletronico text="Eletronico" checked="false" fillColor="white"
-                style="color: white; font-size: 20;"></CheckBox>
-              <CheckBox #funk text="Funk" checked="false" fillColor="white" style="color: white; font-size: 20;">
+                style="color: white; font-size: 20;" (checkedChange)="changedCheckBox()"></CheckBox>
+              <CheckBox #funk text="Funk" checked="false" fillColor="white" style="color: white; font-size: 20;"
+                (checkedChange)="changedCheckBox()">
               </CheckBox>
-              <CheckBox #pop text="Pop" checked="false" fillColor="white" style="color: white; font-size: 20;">
+              <CheckBox #pop text="Pop" checked="false" fillColor="white" style="color: white; font-size: 20;"
+                (checkedChange)="changedCheckBox()">
               </CheckBox>
             </StackLayout>
+
           </StackLayout>
           <StackLayout row="3" style="vertical-align: bottom; height: 100%;">
             <Button text="Alterar Senha" class="btn" style="width: 100%;" (tap)="alterarSenha()"></Button>
@@ -43,12 +48,17 @@
       <ScrollView row="1">
         <GridLayout rows="44, *">
           <GridLayout row="0">
-            <ListPicker [items]="datas" class="picker pickerfont" selectedIndex="5"
+            <ListPicker [items]="datas" class="picker pickerfont" selectedIndex="0"
               (selectedIndexChange)="onSelectedIndexChanged($event)">
             </ListPicker>
           </GridLayout>
           <GridLayout row="1">
-            <RadListView [items]="eventos" marginRight="-2">
+            <StackLayout *ngIf="eventosShow.length === 0">
+              <label class="h1" text=""></label>
+              <label class="h2 center" text="Não há eventos" style="color: white"></label>
+              <label class="h2 center" text="programados para hoje." style="color: white"></label>
+            </StackLayout>
+            <RadListView *ngIf="eventosShow.length > 0" [items]="eventosShow" marginRight="-2">
               <ng-template tkListTemplate let-item="item">
                 <StackLayout margin="20" borderRadius="20">
                   <Image src="{{ item.img }}" class="imagem" stretch="aspectFill"></Image>

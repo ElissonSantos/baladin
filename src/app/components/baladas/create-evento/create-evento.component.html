@@ -15,8 +15,10 @@
           returnKeyType="next"></TextField>
         <StackLayout class="hr-light"></StackLayout>
 
-        <TextField class="input" [(ngModel)]="evento.data" text="Horário do Evento" rows="4" returnKeyType="next">
-        </TextField>
+        <DatePickerField hint="select date"></DatePickerField>
+
+        <!-- <TextField class="input" type="calendar" [(ngModel)]="evento.data" text="Horário do Evento" rows="4" returnKeyType="next">
+        </TextField> -->
         <StackLayout class="hr-light"></StackLayout>
         <DropDown class="dropdown" itemsTextAlignment="center" [items]="estilos" hint="Baladas" (opened)="onopen()"
           (closed)="onclose()"></DropDown>

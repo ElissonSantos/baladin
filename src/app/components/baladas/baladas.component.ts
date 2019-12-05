@@ -7,7 +7,7 @@ import { CardView } from "@nstudio/nativescript-cardview";
 import { registerElement } from "@nativescript/angular/element-registry";
 import { EventData } from "tns-core-modules/data/observable";
 import { ListPicker } from "tns-core-modules/ui/list-picker";
-// import * as moment from "moment";
+import * as moment from "moment";
 
 import { Balada } from "../../models/balada.model";
 import { Evento, EventoReturn } from "../../models/evento.model";
@@ -37,11 +37,16 @@ export class BaladasComponent implements OnInit {
     headerCollapsed = false;
     selectedTab = 0;
     selectedTabview = 0;
-    eventos: Array<EventoReturn>;
-    baladas: Array<Balada>;
-    datas: Array<string>;
+    allEventos: Array<EventoReturn> = [];
+    eventosShow: Array<EventoReturn> = [];
+    baladas: Array<Balada> = [];
+    datas: Array<string> = [];
+    dias: Array<Date> = [];
+    diaSelecionado: Date;
     isAdmin: boolean;
     logotipo: string;
+    diaDeHoje: Date;
+    meses: string[];
 
     constructor(
         private page: Page,
@@ -49,24 +54,38 @@ export class BaladasComponent implements OnInit {
         private routerExtensions: RouterExtensions
     ) {
         this.user = { nome: "Elisson Santos", email: "elissonmaycon@gmail.com", password: "senha" };
-        this.datas = [
-            "24 de Novembro",
-            "25 de Novembro",
-            "26 de Novembro",
-            "27 de Novembro",
-            "28 de Novembro",
-            "29 de Novembro",
-            "30 de Novembro",
-            "01 de Novembro"
-        ];
         this.page['scrollableContent'] = true;
-        this.isAdmin = false;
+        this.isAdmin = true;
         this.logotipo = "~/app/images/logo-baladin.png";
     }
 
     ngOnInit(): void {
-        this.eventos = this.baladasService.getEventos();
+        this.allEventos = this.baladasService.getEventos();
         this.baladas = this.baladasService.getBaladas();
+        this.init();
+    }
+
+    init() {
+        this.carregarMeses();
+
+        this.diaDeHoje = moment(new Date()).toDate();
+        this.diaDeHoje.setHours(0, 0, 0, 0);
+        this.dias.push(new Date(this.diaDeHoje));
+
+        let numberMes = this.diaDeHoje.getMonth();
+        let mesatual = this.meses[numberMes];
+        let dia = this.diaDeHoje.getDay();
+        let diaOrigin: Date = this.diaDeHoje;
+
+        for (let i = 1; i < 20; i++) {
+            dia += 1;
+            const data: string = dia + mesatual;
+            this.datas.push(data)
+
+            diaOrigin.setDate(diaOrigin.getDate() + 1);
+            this.dias.push(new Date(diaOrigin));
+        }
+        console.log(this.dias)
     }
 
     create() {
@@ -87,15 +106,64 @@ export class BaladasComponent implements OnInit {
         })
             .then((data) => {
                 if (data.result) {
-                    alert("Sua senha foi resetada co sucesso. Acesse o email para instruções.");
+                    alert("Sua senha foi resetada com sucesso. Acesse o email para instruções.");
                     this.routerExtensions.navigate(["/baladas"], { clearHistory: true });
                 }
             });
     }
 
-    onSelectedIndexChanged(args: EventData) {
+    changedCheckBox() {
+        this.eventosExibir();
+    }
+
+    onSelectedIndexChanged(args?: EventData) {
         const picker = <ListPicker>args.object;
-        console.log(`Indez ${picker.selectedIndex}; Item ${this.datas[picker.selectedIndex]}`);
+        this.diaSelecionado = this.dias[picker.selectedIndex];
+        this.eventosExibir();
+    }
+
+    eventosExibir() {
+        this.eventosShow = [];
+        this.allEventos.forEach(evento => {
+            if (evento.data.getDate() === this.diaSelecionado.getDate()) {
+                this.eventosShow.push(evento);
+            }
+        });
+
+        this.verificaEstilo();
+    }
+
+    verificaEstilo() {
+        const eventosDoDia = this.eventosShow;
+        this.eventosShow = [];
+
+        const sertanejo = this.sertanejo.nativeElement.checked;
+        const pagode = this.pagode.nativeElement.checked;
+        const eletronico = this.eletronico.nativeElement.checked;
+        const funk = this.funk.nativeElement.checked;
+        const pop = this.pop.nativeElement.checked;
+
+        if (sertanejo || pagode || eletronico || funk || pop) {
+            eventosDoDia.forEach(evento => {
+                if (sertanejo && (evento.estilo === "Sertanejo")) {
+                    this.eventosShow.push(evento);
+                }
+                if (pagode && (evento.estilo === "Pagode")) {
+                    this.eventosShow.push(evento);
+                }
+                if (eletronico && (evento.estilo === "Eletronico")) {
+                    this.eventosShow.push(evento);
+                }
+                if (funk && (evento.estilo === "Funk")) {
+                    this.eventosShow.push(evento);
+                }
+                if (pop && (evento.estilo === "Pop")) {
+                    this.eventosShow.push(evento);
+                }
+            })
+        } else {
+            this.eventosShow = eventosDoDia;
+        }
     }
 
     showEvento(eventoId) {
@@ -131,5 +199,22 @@ export class BaladasComponent implements OnInit {
 
     onOpenDrawerTap(): void {
         this.rSideDrawer.nativeElement.toggleDrawerState();
+    }
+
+    carregarMeses() {
+        this.meses = [
+            " de Janeiro",
+            " de Fevereiro",
+            " de Março",
+            " de Abril",
+            " de Maio",
+            " de Junho",
+            " de Julho",
+            " de Agosto",
+            " de Setembro",
+            " de Outubro",
+            " de Novembro",
+            " de Dezembro",
+        ]
     }
 }

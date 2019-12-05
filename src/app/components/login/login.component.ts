@@ -26,6 +26,7 @@ export class LoginComponent {
         private userService: UserService,
         private routerExtensions: RouterExtensions
     ) {
+        userService.teste();
         this.page.actionBarHidden = true;
         this.user = new User();
         this.logotipo = "~/app/images/logo-baladin.png";
@@ -55,22 +56,21 @@ export class LoginComponent {
     }
 
     login() {
-        this.processing = false;
-        this.routerExtensions.navigate(["/baladas"], { clearHistory: true });
-        // this.userService.login(this.user)
-        //     .then((retorno) => {
-        //         if (retorno) {
-        //             this.processing = false;
-        //             this.routerExtensions.navigate(["/baladas"], { clearHistory: true });
-        //         } else {
-        //             this.processing = false;
-        //             this.alert("Email ou senha está incorreto.");
-        //         }
-        //     })
-        //     .catch(() => {
-        //         this.processing = false;
-        //         this.alert("Email ou senha está incorreto.");
-        //     });
+        this.userService.login(this.user)
+        this.routerExtensions.navigate(["baladas"]);
+            // .then((retorno) => {
+            //     if (retorno) {
+            //         this.processing = false;
+            //         this.routerExtensions.navigate(["/baladas"], { clearHistory: true });
+            //     } else {
+            //         this.processing = false;
+            //         this.alert("Email ou senha está incorreto.");
+            //     }
+            // })
+            // .catch(() => {
+            //     this.processing = false;
+            //     this.alert("Email ou senha está incorreto.");
+            // });
     }
 
     register() {
