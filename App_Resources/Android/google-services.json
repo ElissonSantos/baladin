@@ -1,42 +1,35 @@
 {
   "project_info": {
-    "project_number": "344065851039",
-    "firebase_url": "https://baladin-pi.firebaseio.com",
-    "project_id": "baladin-pi",
-    "storage_bucket": "baladin-pi.appspot.com"
+    "project_number": "1076912158285",
+    "firebase_url": "https://balad-in.firebaseio.com",
+    "project_id": "balad-in",
+    "storage_bucket": "balad-in.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:344065851039:android:67922f1858fbae590bacaa",
+        "mobilesdk_app_id": "1:1076912158285:android:23e6c8538a39621c150e04",
         "android_client_info": {
           "package_name": "org.nativescript.Baladin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "344065851039-ab9usgms9tdnsf1nskea934j5hptvnon.apps.googleusercontent.com",
+          "client_id": "1076912158285-hclbi42qfa3iq9sl544h93qt2e1l4vje.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAZjstHgCAmifjAYZT-Ye1_SR3Zde4Le78"
+          "current_key": "AIzaSyBZ36a-Rm6Z7Xl_4Vkq8aipqz7gFZrLvL0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "344065851039-ab9usgms9tdnsf1nskea934j5hptvnon.apps.googleusercontent.com",
+              "client_id": "1076912158285-hclbi42qfa3iq9sl544h93qt2e1l4vje.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "344065851039-2bclffsahtka2d4suvmj8gghah14iaip.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "org.nativescript.Baladin"
-              }
             }
           ]
         }

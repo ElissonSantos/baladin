@@ -1,0 +1,86 @@
+<ActionBar class="page">
+  <Image src="{{ logotipo }}" class="logoActionBar"></Image>
+</ActionBar>
+
+<GridLayout class="fundo">
+  <RadSideDrawer #rsd drawerTransition="PushTransition" (loaded)="drawerLoaded($event)">
+    <GridLayout tkDrawerContent>
+      <StackLayout backgroundColor="#222122">
+        <StackLayout class="drawer-container" rows="44, *">
+          <StackLayout row="0">
+            <Image class="pi pi-filter"></Image>
+            <Label text="{{ user.nome }}" class="drawer-heading"></Label>
+            <StackLayout class="hr" style="size: 5px;"></StackLayout>
+          </StackLayout>
+          <StackLayout row="1">
+            <Label class="opcoes" text="Escolha o tipo de evento:"></Label>
+
+            <StackLayout style=" horizontal-align: center;">
+              <CheckBox #sertanejo text="Sertanejo" checked="false" fillColor="white"
+                style="color: white; font-size: 20;" (checkedChange)="changedCheckBox()"></CheckBox>
+              <CheckBox #pagode text="Pagode" checked="false" fillColor="white" style="color: white; font-size: 20;"
+                (checkedChange)="changedCheckBox()">
+              </CheckBox>
+              <CheckBox #eletronico text="Eletronico" checked="false" fillColor="white"
+                style="color: white; font-size: 20;" (checkedChange)="changedCheckBox()"></CheckBox>
+              <CheckBox #funk text="Funk" checked="false" fillColor="white" style="color: white; font-size: 20;"
+                (checkedChange)="changedCheckBox()">
+              </CheckBox>
+              <CheckBox #pop text="Pop" checked="false" fillColor="white" style="color: white; font-size: 20;"
+                (checkedChange)="changedCheckBox()">
+              </CheckBox>
+            </StackLayout>
+
+          </StackLayout>
+          <StackLayout row="3" style="vertical-align: bottom; height: 100%;">
+            <Button text="Alterar Senha" class="btn" style="width: 100%;" (tap)="alterarSenha()"></Button>
+            <Button text="Sair" class="btn" style="width: 100%" (tap)="logOut()"></Button>
+          </StackLayout>
+        </StackLayout>
+      </StackLayout>
+    </GridLayout>
+
+    <GridLayout tkMainContent class="page page-content fundo" rows="44, *">
+      <GridLayout row="0">
+        <Label text="&#xf0c9;" class="fas weather" style="padding:10"></Label>
+      </GridLayout>
+
+      <ScrollView row="1">
+        <GridLayout rows="44, *">
+          <GridLayout row="0">
+            <ListPicker [items]="datas" class="picker pickerfont" selectedIndex="0"
+              (selectedIndexChange)="onSelectedIndexChanged($event)">
+            </ListPicker>
+          </GridLayout>
+          <GridLayout row="1">
+            <StackLayout *ngIf="eventosShow.length === 0">
+              <label class="h1" text=""></label>
+              <label class="h2 center" text="Não há eventos" style="color: white"></label>
+              <label class="h2 center" text="programados para hoje." style="color: white"></label>
+            </StackLayout>
+            <RadListView *ngIf="eventosShow.length > 0" [items]="eventosShow" marginRight="-2">
+              <ng-template tkListTemplate let-item="item">
+                <StackLayout margin="20" borderRadius="20">
+                  <Image src="{{ item.img }}" class="imagem" stretch="aspectFill"></Image>
+                  <StackLayout backgroundColor="white" padding="10">
+                    <DockLayout stretchLastChild="true">
+                      <Label class="h2" [text]="item.name"></Label>
+                      <Label class="body fas direita iconAdmin" dock="right" textWrap="true" (tap)="delete(item.id)"
+                        text="&#xf2ed;" *ngIf="isAdmin"></Label>
+                      <Label class="body fas direita iconAdmin" dock="right" textWrap="true" (tap)="edit(item.id)"
+                        text="&#xf044;" *ngIf="isAdmin"></Label>
+                    </DockLayout>
+                    <Label class="body" textWrap="true" [text]="item.nomeBalada"></Label>
+                    <Button text="Tenho Interesse" class="btn" (tap)="showEvento(item.id)"></Button>
+                  </StackLayout>
+                </StackLayout>
+              </ng-template>
+            </RadListView>
+            <FAB *ngIf="isAdmin" rippleColor="#f1f1f1" (tap)="create()" text="+" class="fab-button"></FAB>
+          </GridLayout>
+        </GridLayout>
+      </ScrollView>
+    </GridLayout>
+
+  </RadSideDrawer>
+</GridLayout>

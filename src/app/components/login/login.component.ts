@@ -1,10 +1,9 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { alert, prompt } from "tns-core-modules/ui/dialogs";
-import { Page } from "tns-core-modules/ui/page";
+import { Page, EventData } from "tns-core-modules/ui/page";
 import { RouterExtensions } from "nativescript-angular/router";
 
 import { User } from "../../models/user.model";
-import { UserService } from "../../services/user.service";
 
 @Component({
     selector: "app-login",
@@ -15,26 +14,25 @@ export class LoginComponent {
 
     isLoggingIn = true;
     user: User;
+    confirmPasswordStrign: string;
     processing = false;
     logotipo: string;
 
+    @ViewChild("nome", { static: false }) nome: ElementRef;
     @ViewChild("email", { static: false }) email: ElementRef;
     @ViewChild("password", { static: false }) password: ElementRef;
+    @ViewChild("confirmPassword", { static: false }) confirmPassword: ElementRef;
 
     constructor(
         private page: Page,
-        private userService: UserService,
         private routerExtensions: RouterExtensions
     ) {
-        userService.teste();
         this.page.actionBarHidden = true;
         this.user = new User();
+        this.user.email = "";
+        this.user.password = "";
+        this.confirmPasswordStrign = "";
         this.logotipo = "~/app/images/logo-baladin.png";
-        // this.executa();
-    }
-
-    executa() {
-        this.userService.carregaUsers();
     }
 
     toggleForm() {
@@ -42,10 +40,10 @@ export class LoginComponent {
     }
 
     submit() {
-        // if (!this.user.email || !this.user.password) {
-        //     this.alert("É necessario inserir email e senha.");
-        //     return;
-        // }
+        if (!this.user.email || !this.user.password) {
+            this.alert("É necessario inserir email e senha.");
+            return;
+        }
 
         this.processing = true;
         if (this.isLoggingIn) {
@@ -56,35 +54,16 @@ export class LoginComponent {
     }
 
     login() {
-        this.userService.login(this.user)
-        this.routerExtensions.navigate(["baladas"]);
-            // .then((retorno) => {
-            //     if (retorno) {
-            //         this.processing = false;
-            //         this.routerExtensions.navigate(["/baladas"], { clearHistory: true });
-            //     } else {
-            //         this.processing = false;
-            //         this.alert("Email ou senha está incorreto.");
-            //     }
-            // })
-            // .catch(() => {
-            //     this.processing = false;
-            //     this.alert("Email ou senha está incorreto.");
-            // });
+        if (this.user.email === "elissonmaycon@gmail.com") {
+            this.routerExtensions.navigate(["/baladasAdmin"]);
+        } else {
+            this.routerExtensions.navigate(["/baladas"]);
+        }
     }
 
     register() {
-        this.isLoggingIn = !this.isLoggingIn;
-        // this.userService.register(this.user)
-        //     .then(() => {
-        //         this.processing = false;
-        //         this.alert("Parabens, sua conta já foi criada.");
-        //         this.isLoggingIn = true;
-        //     })
-        //     .catch(() => {
-        //         this.processing = false;
-        //         this.alert("Infelizmente não conseguimos criar a sua conta.");
-        //     });
+        this.processing = false;
+        this.isLoggingIn = false;
     }
 
     forgotPassword() {
@@ -96,17 +75,7 @@ export class LoginComponent {
             okButtonText: "Ok",
             cancelButtonText: "Cancelar"
         })
-            .then((data) => {
-                if (data.result) {
-                    this.userService.resetPassword(data.text.trim())
-                        .then(() => {
-                            this.alert("Sua senha foi resetada co sucesso. Acesse o email para instruções.");
-                        })
-                        .catch(() => {
-                            this.alert("Infelizmente ocorreu um erro ao resetar sua senha.");
-                        });
-                }
-            });
+            .then(() => {});
     }
 
     focusEmail() {
@@ -115,7 +84,10 @@ export class LoginComponent {
         }
     }
 
-    focusPassword() {
+    focusPassword(args: EventData) {
+        console.log("email");
+        console.log(args);
+        console.log(args.object.get("email"));
         this.password.nativeElement.focus();
     }
 

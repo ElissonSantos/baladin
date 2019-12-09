@@ -1,4 +1,4 @@
-export interface Evento {
+export interface EventoDomain {
     id: number;
     name: string;
     data: string;
@@ -7,13 +7,13 @@ export interface Evento {
     img: string;
 }
 
-export interface EventoReturn {
+export interface EventoResouce {
     id: number;
     name: string;
-    data: Date;
     nomeBalada: string;
     enderecoBalada: string;
-    estilo: string;
+    imgBalada: string;
+    data: string;
     descricao: string;
-    img: string;
+    estilo: string;
 }

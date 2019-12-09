@@ -16,6 +16,7 @@ import { BaladasService } from "../../services/baladas.service";
 import { AlterarCadastroComponent } from "./alterar-cadastro/alterar-cadastro.component";
 import { EditEventoComponent } from "./edit-evento/edit-evento.component";
 import { CreateEventoComponent } from "./create-evento/create-evento.component";
+import { BaladasAdminComponent } from "./baladas.component-admin";
 
 @NgModule({
     imports: [
@@ -32,13 +33,14 @@ import { CreateEventoComponent } from "./create-evento/create-evento.component";
     ],
     declarations: [
         BaladasComponent,
+        BaladasAdminComponent,
         BaladaDetailComponent,
         AlterarCadastroComponent,
         EditEventoComponent,
         CreateEventoComponent
     ],
     providers: [
-        BaladasService
+        BaladasService,
     ],
     schemas: [
         NO_ERRORS_SCHEMA

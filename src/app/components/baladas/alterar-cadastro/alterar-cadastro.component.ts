@@ -32,7 +32,7 @@ export class AlterarCadastroComponent implements OnInit {
 
     ngOnInit() {
         this.user.nome = "Elisson Santos"
-        this.user.email = "user@nativescript.org";
+        this.user.email = "elisson@nativescript.org";
         this.user.password = "password";
     }
 

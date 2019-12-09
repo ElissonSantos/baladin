@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Page } from "tns-core-modules/ui/page/page";
 
 import { BaladasService } from "../../../services/baladas.service";
-import { EventoReturn } from "~/app/models/evento.model";
+import { EventoResouce } from "~/app/models/evento.model";
 import { RouterExtensions } from "nativescript-angular/router";
 import { registerElement } from "@nativescript/angular/element-registry";
 
@@ -14,9 +14,9 @@ registerElement("DropDown", () => require("nativescript-drop-down").DropDown)
     templateUrl: "./edit-evento.component.html"
 })
 export class EditEventoComponent implements OnInit {
-    evento: EventoReturn;
+    evento: any;
     estilos: string[];
-    // baladas: string[];
+    baladas: any;
 
     constructor(
         private page: Page,
@@ -24,9 +24,8 @@ export class EditEventoComponent implements OnInit {
         private route: ActivatedRoute,
         private routerExtensions: RouterExtensions
     ) {
-        this.estilos = ["Sertanejo", "Pop", "Pagode", "Funk", "Eletronica"];
+        this.carregaOptions();
         this.page.actionBarHidden = true;
-        // this.baladas = baladasService.getBaladas();
     }
 
     ngOnInit(): void {
@@ -48,5 +47,10 @@ export class EditEventoComponent implements OnInit {
 
     onclose() {
         console.log("DropDown close");
+    }
+
+    carregaOptions() {
+        this.estilos = ["Sertanejo", "Pop", "Pagode", "Funk", "Eletronica"];
+        this.baladas = this.baladasService.getBaladas();
     }
 }

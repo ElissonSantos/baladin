@@ -3,16 +3,17 @@ import { ActivatedRoute } from "@angular/router";
 
 import { Balada } from "../../../models/balada.model";
 import { BaladasService } from "../../../services/baladas.service";
-import { EventoReturn } from "~/app/models/evento.model";
+import { EventoResouce } from "~/app/models/evento.model";
 import { Page } from "tns-core-modules/ui/page/page";
 import { RouterExtensions } from "nativescript-angular/router";
+import * as moment from "moment";
 
 @Component({
     selector: "ns-details",
     templateUrl: "./balada-detail.component.html"
 })
 export class BaladaDetailComponent implements OnInit {
-    evento: EventoReturn;
+    evento: any;
     eventoData: string;
     isAdmin: boolean;
     logotipo: string;
@@ -34,8 +35,9 @@ export class BaladaDetailComponent implements OnInit {
     }
 
     dataFormat() {
-        const dia = this.evento.data.getDay();
-        const mes = this.evento.data.getMonth();
+        const dataEvento: Date = moment(this.evento.data).toDate();
+        const dia = dataEvento.getDay();
+        const mes = dataEvento.getMonth();
         console.log(this.meses)
         const data = `${dia} ${this.meses[mes]}`;
         this.eventoData = data;

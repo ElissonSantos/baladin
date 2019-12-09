@@ -8,12 +8,13 @@
 
           <StackLayout *ngIf="!isLoggingIn">
             <TextField #name class="input" [(ngModel)]="user.nome" [isEnabled]="!processing" hint="Nome"
-              returnKeyType="next" (returnPress)="focusEmail()" [(ngModel)]="user.nome"></TextField>
+              returnKeyType="next" (returnPress)="focusEmail()"></TextField>
             <StackLayout class="hr-light"></StackLayout>
           </StackLayout>
 
-          <TextField class="input" [(ngModel)]="user.email" hint="Email" [isEnabled]="!processing" keyboardType="email"
-            autocorrect="false" autocapitalizationType="none" returnKeyType="next" (returnPress)="focusPassword()">
+          <TextField #email class="input" [(ngModel)]="user.email" hint="Email" [isEnabled]="!processing"
+            keyboardType="email" autocorrect="false" autocapitalizationType="none" returnKeyType="next"
+            (returnPress)="focusPassword($event)">
           </TextField>
           <StackLayout class="hr-light"></StackLayout>
 
@@ -27,7 +28,7 @@
 
           <StackLayout *ngIf="!isLoggingIn">
             <TextField #confirmPassword class="input" [isEnabled]="!processing" hint="Confirmar senha" secure="true"
-              returnKeyType="done"></TextField>
+              returnKeyType="done" [(ngModel)]="confirmPasswordString"></TextField>
             <StackLayout class="hr-light"></StackLayout>
           </StackLayout>
 
@@ -38,8 +39,7 @@
       </GridLayout>
     </PreviousNextView>
 
-    <Button [text]="isLoggingIn ? 'Entrar' : 'Cadastrar'" [isEnabled]="!processing" class="btn btn-primary m-t-20"
-      (tap)="submit()"></Button>
+    <Button [text]="isLoggingIn ? 'Entrar' : 'Cadastrar'" class="btn btn-primary m-t-20" (tap)="submit()"></Button>
 
     <Label *ngIf="isLoggingIn" text="Esqueceu sua senha?" class="login-label" (tap)="forgotPassword()"></Label>
 

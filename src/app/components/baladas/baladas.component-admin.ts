@@ -18,11 +18,11 @@ registerElement("CardView", () => CardView);
 registerElement("Fab", () => require("@nstudio/nativescript-floatingactionbutton").Fab)
 
 @Component({
-    selector: "ns-baladas",
+    selector: "ns-baladas-admin",
     moduleId: module.id,
-    templateUrl: "./baladas.component.html"
+    templateUrl: "./baladas.component-admin.html"
 })
-export class BaladasComponent implements OnInit {
+export class BaladasAdminComponent implements OnInit {
 
     @ViewChild("rsd", { static: false }) rSideDrawer: ElementRef;
     @ViewChild('sertanejo', { static: false }) sertanejo: ElementRef;
@@ -55,12 +55,12 @@ export class BaladasComponent implements OnInit {
     ) {
         this.carregaUser();
         this.page['scrollableContent'] = true;
-        this.isAdmin = false;
+        this.isAdmin = true;
         this.logotipo = "~/app/images/logo-baladin.png";
     }
 
     ngOnInit(): void {
-        this.allEventos = this.baladasService.getEventos()
+        this.allEventos = this.baladasService.getEventos();
         this.init();
     }
 
